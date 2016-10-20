@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Scramble</title>
+</head>
+<body>
+    <h1>A Javascript Word Scramble Game</h1>
+
+    <script>
+
+        function scramble(word){
+            var a = word.split(""),
+                n = a.length;
+
+            for(var i = n - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var tmp = a[i];
+                a[i] = a[j];
+                a[j] = tmp;
+            }
+            return a.join("");
+
+        }
+
+        var WORDS     = ["booger", "apple", "hackbright", "mango", "window", "jacket", "mixer", 
+                         "boat"];
+
+        var playing = true;
+
+        while (playing) {
+
+            // Grab a random word from the WORDS array
+
+            var max = Math.floor(WORDS.length - 1);
+            random_word_index = Math.floor(Math.random() * max);
+            var word = WORDS[random_word_index];
+
+            // Grab the corresponding scrambled word from the SCRAMBLED array
+
+            var scrambled_word = scramble(word);
+
+
+            // prompt the user to guess the original word when given the scrambled word
+
+            var guessed_word = prompt(scrambled_word + " Can you guess the word?");
+            var guessed_word_lower = guessed_word.toLowerCase().trim();
+
+            // If the user guesses wrong, tell them they were wrong and the right word.
+
+            if (guessed_word_lower !== word) {
+                alert("You guessed wrong! The right answer is " + word);
+            }
+
+            
+            // If the user guesses the correct word, congratulate them.
+
+            else {
+                alert("You guessed it right! Congratulations!");
+            }
+
+            playing = confirm("Press OK To keep playing or Cancel to quit");
+
+            // What does confirm() return?
+            // What does setting the playing variable do?
+        }
+
+        alert("goodbye!");
+
+    </script>
+    
+</body>
+</html>
