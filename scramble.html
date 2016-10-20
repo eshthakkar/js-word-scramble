@@ -26,6 +26,7 @@
                          "boat"];
 
         var playing = true;
+        var count = 0;
 
         while (playing) {
 
@@ -46,18 +47,21 @@
             var guessed_word_lower = guessed_word.toLowerCase().trim();
 
             // If the user guesses wrong, tell them they were wrong and the right word.
+            while(count < 2){
+                if (guessed_word_lower !== word) {
+                    guessed_word_lower = prompt("You guessed wrong! Please try again!").toLowerCase().trim();
+                    count++;
+                }
 
-            if (guessed_word_lower !== word) {
-                alert("You guessed wrong! The right answer is " + word);
+                
+                // If the user guesses the correct word, congratulate them.
+
+                else {
+                    alert("You guessed it right! Congratulations!");
+                    break;
+                }
             }
-
-            
-            // If the user guesses the correct word, congratulate them.
-
-            else {
-                alert("You guessed it right! Congratulations!");
-            }
-
+            alert("Sorry you are out of tries ! The word is " + word);
             playing = confirm("Press OK To keep playing or Cancel to quit");
 
             // What does confirm() return?
